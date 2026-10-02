@@ -12,10 +12,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Load .env file
 load_dotenv(BASE_DIR / '.env')
-
-
 # Quick-start development settings - unsuitable for production
-SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'django-insecure-olimpiada-platform-secret-key-change-in-production')
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', os.environ.get('SECRET_KEY', 'django-insecure-olimpiada-platform-secret-key-change-in-production'))
 
 DEBUG = os.environ.get('DJANGO_DEBUG', 'True').lower() in ('true', '1', 'yes')
 
@@ -240,8 +238,6 @@ CSRF_TRUSTED_ORIGINS = [
 ]
 
 
-# USE_X_FORWARDED_PORT = True
-
 # ESKIZ SMS API Config
-ESKIZ_EMAIL = os.environ.get('ESKIZ_EMAIL', 'test@eskiz.uz')
-ESKIZ_PASSWORD = os.environ.get('ESKIZ_PASSWORD', 'testpassword')
+ESKIZ_EMAIL = os.environ.get('ESKIZ_EMAIL', 'shohruhbek007dev@gmail.com')
+ESKIZ_PASSWORD = os.environ.get('ESKIZ_PASSWORD', 'Salom123')
