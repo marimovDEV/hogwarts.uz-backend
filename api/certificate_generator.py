@@ -229,7 +229,7 @@ class CertificateGenerator:
         qr_y = 70
         
         # Generate QR internally
-        verify_url = f"https://hogwords.uz/certificate/verify/{self.cert.cert_number}"
+        verify_url = f"https://hogwarts.uz/certificate/verify/{self.cert.cert_number}"
         qr = qrcode.QRCode(version=1, box_size=10, border=1)
         qr.add_data(verify_url)
         qr.make(fit=True)
@@ -320,7 +320,7 @@ def generate_qr_code(certificate):
     Generate QR code image for certificate verification
     Returns ContentFile for saving to model
     """
-    verify_url = f"https://ardent.uz/certificate/verify/{certificate.cert_number}"
+    verify_url = f"https://hogwarts.uz/certificate/verify/{certificate.cert_number}"
     
     qr = qrcode.QRCode(version=1, box_size=10, border=2)
     qr.add_data(verify_url)

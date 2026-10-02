@@ -86,7 +86,7 @@ class BotService:
 📚 Fan: {olympiad.subject}
 🕒 Vaqt: {olympiad.start_date.strftime('%H:%M')}
 
-<a href="https://ardent.uz/olympiad/{olympiad.id}">Platformada qatnashish</a>
+<a href="https://hogwarts.uz/olympiad/{olympiad.id}">Platformada qatnashish</a>
 """
         return cls.send_message(user.telegram_id, text)
 
@@ -122,7 +122,7 @@ class BotService:
 ✅ Ball: {result.score} ({result.percentage:.1f}%)
 ⏱ Vaqt: {result.time_taken} sek
         
-<a href="https://ardent.uz/olympiad/{result.olympiad.id}/result">Batafsil ko'rish</a>
+<a href="https://hogwarts.uz/olympiad/{result.olympiad.id}/result">Batafsil ko'rish</a>
 """
         return cls.send_message(user.telegram_id, text)
     

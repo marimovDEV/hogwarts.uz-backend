@@ -22,14 +22,14 @@ class EmailService:
     @classmethod
     def send_welcome_email(cls, user):
         """Send welcome email to new user"""
-        subject = "Hogwords Olimpiada platformasiga xush kelibsiz!"
+        subject = "Hogwarts platformasiga xush kelibsiz!"
         message = f"""
         <h1>Assalomu alaykum, {user.first_name}!</h1>
         <p>Siz muvaffaqiyatli ro'yxatdan o'tdingiz.</p>
         <p>Login: {user.phone}</p>
         <br>
         <p>Platformadan foydalanishni boshlash uchun quyidagi havolani bosing:</p>
-        <a href="https://hogwords.uz/dashboard">Kirish</a>
+        <a href="https://hogwarts.uz/dashboard">Kirish</a>
         """
         threading.Thread(target=cls.send_async_email, args=(subject, message, [user.email or user.username + "@example.com"])).start()
 

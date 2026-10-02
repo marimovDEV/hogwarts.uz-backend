@@ -2,19 +2,35 @@
 Django settings for config project - Olimpiada Platform
 """
 
+import os
 from pathlib import Path
 from datetime import timedelta
+from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# Load .env file
+load_dotenv(BASE_DIR / '.env')
+
 
 # Quick-start development settings - unsuitable for production
-SECRET_KEY = 'django-insecure-olimpiada-platform-secret-key-change-in-production'
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'django-insecure-olimpiada-platform-secret-key-change-in-production')
 
-DEBUG = True
+DEBUG = os.environ.get('DJANGO_DEBUG', 'True').lower() in ('true', '1', 'yes')
 
-ALLOWED_HOSTS = ['test.api.ardentsoft.uz', 'api.hogwords.uz', 'hogwords.uz', 'www.hogwords.uz', 'localhost', '127.0.0.1', '*']
+ALLOWED_HOSTS = [
+    'api.hogwarts.uz',
+    'hogwarts.uz',
+    'www.hogwarts.uz',
+    'api.hogwords.uz',
+    'hogwords.uz',
+    'www.hogwords.uz',
+    'test.api.ardentsoft.uz',
+    'localhost',
+    '127.0.0.1',
+    '*'
+]
 
 
 # Application definition
@@ -98,6 +114,7 @@ USE_TZ = True
 
 # Static files
 STATIC_URL = '/static/'
+STATIC_ROOT = BASE_DIR / 'static'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
@@ -108,17 +125,25 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # CORS Settings
 CORS_ALLOWED_ORIGINS = [
-    "http://test.api.ardentsoft.uz",
-    "https://test.api.ardentsoft.uz",
-    "https://api.hogwords.uz",
+    "https://hogwarts.uz",
+    "https://www.hogwarts.uz",
+    "https://api.hogwarts.uz",
+    "http://hogwarts.uz",
+    "http://www.hogwarts.uz",
+    "http://api.hogwarts.uz",
     "https://hogwords.uz",
     "https://www.hogwords.uz",
+    "https://api.hogwords.uz",
+    "http://hogwords.uz",
+    "http://www.hogwords.uz",
+    "http://test.api.ardentsoft.uz",
+    "https://test.api.ardentsoft.uz",
     "https://ardent-olimpiada-course.vercel.app",
     "https://course.ardentsoft.uz",
     "http://localhost:5173",
     "http://127.0.0.1:5173",
-    "http://hogwords.uz",
-    "http://www.hogwords.uz",
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
 ]
 CORS_ALLOW_CREDENTIALS = True
 
@@ -150,8 +175,8 @@ REST_FRAMEWORK = {
 
 
 SPECTACULAR_SETTINGS = {
-    'TITLE': 'Hogwords Olimpiada API',
-    'DESCRIPTION': 'API documentation for Hogwords Olimpiada platform',
+    'TITLE': 'Hogwarts API',
+    'DESCRIPTION': 'API documentation for Hogwarts platform',
     'VERSION': '1.0.0',
     'SERVE_INCLUDE_SCHEMA': False,
     'SERVE_PERMISSIONS': ['rest_framework.permissions.IsAdminUser'],
@@ -168,9 +193,9 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'apiexample@gmail.com'
-EMAIL_HOST_PASSWORD = 'password'
-DEFAULT_FROM_EMAIL = 'Hogwords Olimpiada <noreply@ardent.uz>'
+EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER', 'apiexample@gmail.com')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', 'password')
+DEFAULT_FROM_EMAIL = 'Hogwarts <noreply@hogwarts.uz>'
 
 
 # Wallet System Settings
@@ -184,7 +209,7 @@ MIN_PAYOUT_AMOUNT = 100000  # Minimum withdrawal amount (100k so'm)
 SECURE_BROWSER_XSS_FILTER = True
 SECURE_CONTENT_TYPE_NOSNIFF = True
 X_FRAME_OPTIONS = 'DENY'
-SECURE_SSL_REDIRECT = True # Enable in production with SSL
+SECURE_SSL_REDIRECT = os.environ.get('DJANGO_SECURE_SSL_REDIRECT', 'False').lower() in ('true', '1', 'yes')
 SECURE_HSTS_SECONDS = 31536000
 SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 SECURE_HSTS_PRELOAD = True
@@ -195,13 +220,23 @@ USE_X_FORWARDED_HOST = True
 # USE_X_FORWARDED_PORT = True
 
 CSRF_TRUSTED_ORIGINS = [
+    "https://hogwarts.uz",
+    "https://www.hogwarts.uz",
+    "https://api.hogwarts.uz",
+    "http://hogwarts.uz",
+    "http://www.hogwarts.uz",
+    "http://api.hogwarts.uz",
+    "https://hogwords.uz",
+    "https://www.hogwords.uz",
+    "https://api.hogwords.uz",
     "https://ardent-olimpiada-course.vercel.app",
     "https://course.ardentsoft.uz",
     "https://api.ardentsoft.uz",
     "https://test.api.ardentsoft.uz",
-    "https://api.hogwords.uz",
-    "https://hogwords.uz",
-    "https://www.hogwords.uz",
+    "http://localhost:5173",
+    "http://127.0.0.1:5173",
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
 ]
 
 

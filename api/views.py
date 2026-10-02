@@ -121,14 +121,8 @@ def send_verification_code(request):
         expires_at=timezone.now() + timedelta(minutes=10)
     )
     
-    # Format message for SMS
-    formatted_phone = format_phone_number(phone)
-    if request_type == 'recover':
-        title = "HOGWORDS: Parolni tiklash."
-    else:
-        title = "HOGWORDS: Yangi ro'yxatdan o'tish."
-
-    message = f"{title}\nSizning tasdiqlash kodingiz: {code}\nKod 10 daqiqa davomida amal qiladi."
+    # Format message for SMS according to approved Eskiz template
+    message = f"HOGWARTS platformasiga kirish uchun tasdiqlash kodi: {code}"
     
     # Send via Eskiz SMS
     sms_sent = EskizSMSService.send_sms(phone, message)
@@ -167,7 +161,7 @@ def forgot_password(request):
         expires_at=timezone.now() + timedelta(minutes=10)
     )
     
-    sms_message = f"HOGWORDS: Parolni tiklash.\nSizning tasdiqlash kodingiz: {code}\nKod 10 daqiqa davomida amal qiladi."
+    sms_message = f"HOGWARTS platformasiga kirish uchun tasdiqlash kodi: {code}"
     sms_sent = EskizSMSService.send_sms(phone, sms_message)
     
     if not sms_sent:
@@ -4527,10 +4521,10 @@ def telegram_webhook(request):
                 if user:
                     show_main_menu(chat_id, f"Qaytganingizdan xursandmiz, <b>{user.first_name}</b>!")
                 else:
-                    welcome_text = "👋 <b>Hogwords Olimpiada botiga xush kelibsiz!</b>\n\nHisobingizni bog'lash uchun platformadagi profilingizdan foydalaning."
+                    welcome_text = "👋 <b>Hogwarts botiga xush kelibsiz!</b>\n\nHisobingizni bog'lash uchun platformadagi profilingizdan foydalaning."
                     reply_markup = {
                         "inline_keyboard": [[
-                            {"text": "🚀 Platformada ro'yxatdan o'tish", "url": "https://hogwords.uz/auth"}
+                            {"text": "🚀 Platformada ro'yxatdan o'tish", "url": "https://hogwarts.uz/auth"}
                         ]]
                     }
                     BotService.send_message(chat_id, welcome_text, reply_markup=reply_markup)
