@@ -124,9 +124,9 @@ def send_verification_code(request):
     # Format message for SMS
     formatted_phone = format_phone_number(phone)
     if request_type == 'recover':
-        title = "HOGWORDS: Parolni tiklash."
+        title = "HOGWARTS: Parolni tiklash."
     else:
-        title = "HOGWORDS: Yangi ro'yxatdan o'tish."
+        title = "HOGWARTS: Yangi ro'yxatdan o'tish."
 
     message = f"{title}\nSizning tasdiqlash kodingiz: {code}\nKod 10 daqiqa davomida amal qiladi."
     
@@ -167,7 +167,7 @@ def forgot_password(request):
         expires_at=timezone.now() + timedelta(minutes=10)
     )
     
-    sms_message = f"HOGWORDS: Parolni tiklash.\nSizning tasdiqlash kodingiz: {code}\nKod 10 daqiqa davomida amal qiladi."
+    sms_message = f"HOGWARTS: Parolni tiklash.\nSizning tasdiqlash kodingiz: {code}\nKod 10 daqiqa davomida amal qiladi."
     sms_sent = EskizSMSService.send_sms(phone, sms_message)
     
     if not sms_sent:

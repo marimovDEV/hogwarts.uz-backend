@@ -2,19 +2,28 @@
 Django settings for config project - Olimpiada Platform
 """
 
+import os
 from pathlib import Path
 from datetime import timedelta
+from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# Load .env file
+load_dotenv(BASE_DIR / '.env')
 
 # Quick-start development settings - unsuitable for production
-SECRET_KEY = 'django-insecure-olimpiada-platform-secret-key-change-in-production'
+SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-olimpiada-platform-secret-key-change-in-production')
 
 DEBUG = True
 
-ALLOWED_HOSTS = ['test.api.ardentsoft.uz', 'api.hogwords.uz', 'hogwords.uz', 'www.hogwords.uz', 'localhost', '127.0.0.1', '*']
+ALLOWED_HOSTS = [
+    'test.api.ardentsoft.uz',
+    'api.hogwords.uz', 'hogwords.uz', 'www.hogwords.uz',
+    'api.hogwarts.uz', 'hogwarts.uz', 'www.hogwarts.uz',
+    'localhost', '127.0.0.1', '*'
+]
 
 
 # Application definition
@@ -202,11 +211,12 @@ CSRF_TRUSTED_ORIGINS = [
     "https://api.hogwords.uz",
     "https://hogwords.uz",
     "https://www.hogwords.uz",
+    "https://api.hogwarts.uz",
+    "https://hogwarts.uz",
+    "https://www.hogwarts.uz",
 ]
 
 
-# USE_X_FORWARDED_PORT = True
-
 # ESKIZ SMS API Config
-ESKIZ_EMAIL = os.environ.get('ESKIZ_EMAIL', 'test@eskiz.uz')
-ESKIZ_PASSWORD = os.environ.get('ESKIZ_PASSWORD', 'testpassword')
+ESKIZ_EMAIL = os.environ.get('ESKIZ_EMAIL', 'shohruhbek007dev@gmail.com')
+ESKIZ_PASSWORD = os.environ.get('ESKIZ_PASSWORD', 'Salom123')
